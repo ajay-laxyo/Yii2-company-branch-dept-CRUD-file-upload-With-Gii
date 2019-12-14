@@ -26,25 +26,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'c_id',
             'c_name',
             'c_email:email',
             'c_address',
             'c_created_date',
-            //'c_status',
-
             [
                 'attribute' => 'logo',
                 'format' => 'html',
                 'value' => function($model)
                 {
-                    return yii\bootstrap\Html::img($model->logo,['width'=>'80', 'height'=>'80']);
+                     return yii\bootstrap\Html::img($model->logo,['width'=>'80', 'height'=>'80']);
                 }
             ],
 
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
-
+    ]); 
+    ?>
 
 </div>

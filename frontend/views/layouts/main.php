@@ -37,10 +37,10 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Company', 'url' => ['/companies/index']],
         ['label' => 'Branch', 'url' => ['/branches/index']],
         ['label' => 'Department', 'url' => ['/departments/index']],
+        ['label' => 'Employees', 'url' => ['/employees/index']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {

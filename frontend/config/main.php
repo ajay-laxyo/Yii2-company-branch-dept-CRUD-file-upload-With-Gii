@@ -7,6 +7,7 @@ $params = array_merge(
 );
 
 return [
+    
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -44,16 +45,16 @@ return [
 
         'MyComponent'=>[
             'class'=>'frontend\components\MyComponent',
-        ]
-
-        /*
+        ],
+        
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];
