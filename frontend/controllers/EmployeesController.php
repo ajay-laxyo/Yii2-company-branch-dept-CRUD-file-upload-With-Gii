@@ -118,8 +118,41 @@ class EmployeesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        //     return $this->redirect(['view', 'id' => $model->id]);
+        // }
+
+        if ($model->load(Yii::$app->request->post())) 
+        {
+            $imageName = $model->emp_code;
+            $model->pro_pic = UploadedFile::getInstance($model, 'pro_pic');
+            $model->pro_pic->saveAs( 'profile_pictures/'.$imageName.'.'.$model->pro_pic->extension );
+
+            $model->pro_pic = 'profile_pictures/'.$imageName.'.'.$model->pro_pic->extension;
+
+            $model->e_created_date = date('Y-m-d h:m:s');
+            if($model->save())
+            {
+                $model_sal = new EmpSalRc();
+
+                $code = $model->emp_code;
+               
+                \Yii::$app
+                ->db
+                ->createCommand()
+                ->delete('emp_sal_rc', ['emp_code' => $code])
+                ->execute();
+                
+
+                $model_sal->emp_code = $model->emp_code;
+                $model_sal->name = $model->name;
+                $model_sal->salary = $model->salary;
+
+                //print_r($model_sal); die();
+                $model_sal->save();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            
         }
 
         return $this->render('update', [
