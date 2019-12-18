@@ -35,9 +35,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'value' => function($model)
                 {
-                     return yii\bootstrap\Html::img($model->logo,['width'=>'80', 'height'=>'80']);
+                     return Html::img(Yii::getAlias('@web').'/'.$model->logo, ['height'=>'80px', 'width'=>'80px']);
                 }
             ],
+
+        //     [
+        //     'attribute'=>'logo',
+        //     'value' =>  Html::a(Html::img(Yii::getAlias('@web').'/uploads/'.$st_data->photo, ['alt'=>'some', 'class'=>'thing', 'height'=>'100px', 'width'=>'100px']), ['site/zoom']),
+        //     'format' => ['raw'],
+        // ],
+
+            // [
+            // 'label'=>'logo',
+            // 'format'=>'raw',
+            // 'value' => function($data){
+            //     $url = "http://127.0.0.1/advanced/frontend/web/".$data->logo;
+            //     return Html::img($url,['alt'=>'yii']); 
+            // }
+            // ],
 
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -64,4 +64,17 @@ class Branches extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Departments::className(), ['b_id' => 'b_id']);
     }
+
+    public static function getSubCatList($b_id) {
+        $out = [];
+         $models = Branches::find()
+        ->where('c_id = :c_id')
+        ->addParams([':c_id' => $b_id])
+        ->all();
+       foreach ($models as $i => $branch) {
+          //  print_r($state);
+       $out[] = ['id' => $branch['b_id'], 'name' => $branch['b_name']];
+        }
+       return $out;
+    }
 }

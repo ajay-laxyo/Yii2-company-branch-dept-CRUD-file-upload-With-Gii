@@ -3,12 +3,14 @@
 namespace frontend\controllers;
 
 use Yii;
+use frontend\models\Branches;
 use frontend\models\Departments;
 use frontend\models\DepartmentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use kartik\depdrop\DepDrop;
 
 /**
  * DepartmentsController implements the CRUD actions for Departments model.
@@ -121,6 +123,23 @@ class DepartmentsController extends Controller
 
         return $this->redirect(['index']);
     }
+
+
+    public function actionDept() {
+    $out = [];
+    $statemodel = new Branches();
+    if (isset($_POST['depdrop_parents'])) {
+        $parents = $_POST['depdrop_parents'];
+        if ($parents != null) {
+            $b_id = $parents[0];
+            $out =  $statemodel->getSubCatList($b_id); 
+            return \yii\helpers\Json::encode(['output'=>$out, 'selected'=>'']);
+        }
+    }
+
+    echo \yii\helpers\Json::encode(['output'=>'', 'selected'=>'']);
+
+}
 
     /**
      * Finds the Departments model based on its primary key value.
